@@ -3,7 +3,7 @@ pipeline{
   stages{
     stage('Build'){
       steps{
-        sh 'g++ main/hello.cpp -o output'
+        sh 'g++ main/world.cpp -o output'
         build 'PES2UG20CS276-1'
         echo 'Build Successful'
       }
@@ -17,7 +17,7 @@ pipeline{
     stage('Deploy'){
       when{
         expression{
-          currentBuild.result != null && currentBuild.result == 'SUCCESS'
+          currentBuild.result == null || currentBuild.result == 'SUCCESS'
         }
       }
       steps{
